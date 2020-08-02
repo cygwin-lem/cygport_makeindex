@@ -8,11 +8,9 @@ ARCH2M=(
 )
 
 list2html () {
-  echo "<html>"
-  echo "<body>"
+  echo "<html><body><ul>"
   perl -ne 'chop; print "<li><a href=\"$_\">$_</a></li>\n";'
-  echo "</body>"
-  echo "</html>"
+  echo "</ul></body></html>"
 }
 
 makelist () {
