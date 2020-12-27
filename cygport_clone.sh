@@ -6,11 +6,25 @@ CYGWIN_PACKAGES_ROOT_GIT="https://cygwin.com/git/cygwin-packages"
 inform () {
   printf "*** Info: %s\n" "$*"
 }
+warn () {
+  printf "*** Warning: %s\n" "$*"
+}
+
+error () {
+  printf "*** Error: %s\n" "$*"
+  exit 1
+}
 
 git_cygwin_packages_clone () {
   local NAME="$1"
   local REPO_CYGWIN="${CYGWIN_PACKAGES_ROOT_GIT}/${NAME}"
   local REPO_LOCAL="${NAME}-cygport"
+
+  if [ -d "${REPO_LOCAL}" ]; then
+    error "Already exists ${REPO_LOCAL}"
+    return 1
+  fi
+
   inform "Cloning ${REPO_CYGWIN}"
 
   mkdir -p "${REPO_LOCAL}"
